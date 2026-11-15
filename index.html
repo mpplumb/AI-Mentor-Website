@@ -7,7 +7,7 @@
 <meta name="description" content="Assured &amp; Affordable AI Guidance. Consumer protection first — AI strategy, automation, websites, web applications and brand design from Michael Plumb.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&family=Libre+Franklin:wght@700&display=swap">
 
 <style>
 /* ================= TOKENS ================= */
@@ -187,21 +187,24 @@ img{max-width:100%;display:block}
 .brandmark{display:flex;flex-direction:column;align-items:center;margin-bottom:30px}
 .brandmark img{width:164px;height:auto;margin-bottom:24px}
 .brandmark .wm{
-  font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;color:var(--wordmark);
+  font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;color:var(--wordmark);
   font-size:clamp(58px,10.6vw,126px);letter-spacing:-.045em;line-height:1;margin:0;
 }
 .brandmark .slogan{
-  font-family:"IBM Plex Mono",monospace;font-size:clamp(14px,2.4vw,24px);
-  letter-spacing:.16em;text-transform:uppercase;color:var(--body);margin-top:22px;
-  max-width:40ch;line-height:1.5;
+  font-family:"IBM Plex Mono",monospace;
+  font-size:min(1.92vw,23px);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--body);margin-top:22px;
+  max-width:none;line-height:1.5;white-space:nowrap;
 }
 .brandmark .rule{
   width:min(400px,72%);height:5px;border-radius:99px;margin-top:28px;
   background:linear-gradient(96deg,
-    var(--blue) 0%, var(--green) 25%, var(--blue) 50%,
-    var(--green) 75%, var(--blue) 100%);
+    #0A6CB4 0%, var(--blue) 9%, #9BE8FF 16%, var(--blue) 23%,
+    var(--green) 34%, #0A7A3C 42%, var(--green) 50%,
+    #B6FFD4 58%, var(--green) 66%, var(--blue) 78%,
+    #9BE8FF 88%, #0A6CB4 100%);
   background-size:300% 100%;
-  animation:ruleflow 9s linear infinite;
+  animation:ruleflow 5.5s linear infinite;
 }
 @keyframes ruleflow{
   from{background-position:0% 50%}
@@ -226,33 +229,40 @@ img{max-width:100%;display:block}
 }
 @media(max-width:560px){.herophoto{width:min(460px,100%)}}
 
-/* ---- homepage: slow looping photo band ---- */
+/* ---- homepage: photo band, one image at a time, cross-dissolving ---- */
 .hero .brandmark{margin-bottom:60px}
 .heroscroll{
-  --slidew:min(640px,86vw);
   --slideh:clamp(200px,25vw,330px);
-  width:100%;overflow:hidden;line-height:0;
-  -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 12%,#000 88%,transparent 100%);
-  mask-image:linear-gradient(to right,transparent 0%,#000 12%,#000 88%,transparent 100%);
+  --step:6s; --cycle:24s;
+  position:relative;width:100%;height:var(--slideh);overflow:hidden;line-height:0;
+  -webkit-mask-image:
+    linear-gradient(to right,transparent 0%,#000 11%,#000 89%,transparent 100%),
+    linear-gradient(to bottom,transparent 0%,#000 15%,#000 85%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:
+    linear-gradient(to right,transparent 0%,#000 11%,#000 89%,transparent 100%),
+    linear-gradient(to bottom,transparent 0%,#000 15%,#000 85%,transparent 100%);
+  mask-composite:intersect;
 }
-.hstrack{
-  display:flex;width:max-content;
-  animation:hsroll 64s linear infinite;
-  will-change:transform;
+.hsph{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;display:block;
+  animation:hsfade var(--cycle) linear infinite, hsdrift var(--cycle) linear infinite;
+  will-change:opacity,object-position;
 }
-@keyframes hsroll{
-  from{transform:translate3d(0,0,0)}
-  to{transform:translate3d(calc(var(--slidew) * -4),0,0)}
+/* first frame shows photo one, so the band is never blank on load */
+@keyframes hsfade{
+  0%{opacity:1} 16.67%{opacity:1} 25%{opacity:0} 91.67%{opacity:0} 100%{opacity:1}
 }
-.hsphoto{
-  margin:0;flex:0 0 var(--slidew);width:var(--slidew);
-  -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 17%, #000 83%, transparent 100%);
-  mask-image:linear-gradient(to bottom, transparent 0%, #000 17%, #000 83%, transparent 100%);
+@keyframes hsdrift{
+  0%{object-position:48% 46%} 25%{object-position:56% 46%}
+  25.01%{object-position:44% 46%} 91.67%{object-position:44% 46%}
+  100%{object-position:48% 46%}
 }
-.hsphoto img{
-  width:100%;height:var(--slideh);object-fit:cover;object-position:center 46%;display:block;
+@media(prefers-reduced-motion:reduce){
+  .hsph{animation:none;opacity:0;object-position:50% 46%}
+  .hsph:first-of-type{opacity:1}
 }
-@media(prefers-reduced-motion:reduce){.hstrack{animation:none}}
 .brandmark.sm{margin-bottom:24px}
 .brandmark.sm img{width:104px;margin-bottom:18px}
 .brandmark.sm .wm{font-size:clamp(32px,4.8vw,46px);letter-spacing:-.048em}
@@ -260,7 +270,7 @@ img{max-width:100%;display:block}
 .brandmark.sm .rule{width:min(230px,56%);height:3px;margin-top:18px}
 @media(max-width:560px){
   .brandmark img{width:112px}
-  .brandmark .slogan{letter-spacing:.12em}
+  .brandmark .slogan{letter-spacing:.1em;font-size:min(2.05vw,23px)}
   .brandmark.sm img{width:76px}
 }
 
@@ -274,7 +284,7 @@ img{max-width:100%;display:block}
 .marquee{
   padding:26px 0 28px;display:flex;flex-direction:column;gap:clamp(4px,0.5vw,10px);align-items:center;
   overflow-x:auto;scrollbar-width:none;
-  font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;font-size:clamp(15px,2.35vw,34px);color:var(--ink);letter-spacing:-.04em;
+  font-family:"Libre Franklin",sans-serif;font-weight:700;font-size:clamp(11px,1.5vw,24px);color:var(--ink);letter-spacing:-.025em;
 }
 .marquee::-webkit-scrollbar{display:none}
 .mqrow{display:flex;align-items:center;justify-content:safe center;gap:clamp(8px,1vw,18px);max-width:100%}
@@ -855,26 +865,18 @@ a.val:hover{color:var(--blue-tx)}
         <span class="rule"></span>
       </div>
       <div class="heroscroll" aria-label="Photographs of the people AI Mentor works for">
-        <div class="hstrack">
-          <figure class="hsphoto"><img src="assets/hands.webp" alt="Hands from different people cupping soil around a seedling" width="1408" height="768" loading="lazy"></figure>
-          <figure class="hsphoto"><img src="assets/friends.webp" alt="Four friends laughing together in a park" width="1408" height="768" loading="lazy"></figure>
-          <figure class="hsphoto"><img src="assets/city.webp" alt="A busy city street at night lit by signs and traffic" width="1408" height="768" loading="lazy"></figure>
-          <figure class="hsphoto"><img src="assets/family.webp" alt="A family watching the sunset together, a child pointing at the horizon" width="1408" height="768" loading="lazy"></figure>
-          <figure class="hsphoto" aria-hidden="true"><img src="assets/hands.webp" alt="" width="1408" height="768" loading="lazy"></figure>
-          <figure class="hsphoto" aria-hidden="true"><img src="assets/friends.webp" alt="" width="1408" height="768" loading="lazy"></figure>
-          <figure class="hsphoto" aria-hidden="true"><img src="assets/city.webp" alt="" width="1408" height="768" loading="lazy"></figure>
-          <figure class="hsphoto" aria-hidden="true"><img src="assets/family.webp" alt="" width="1408" height="768" loading="lazy"></figure>
-        </div>
+        <img class="hsph" src="assets/hands.webp" alt="Hands from different people cupping soil around a seedling" width="1408" height="768" style="animation-delay:0s">
+        <img class="hsph" src="assets/friends.webp" alt="" width="1408" height="768" style="animation-delay:calc(var(--step) * -3)">
+        <img class="hsph" src="assets/city.webp" alt="" width="1408" height="768" style="animation-delay:calc(var(--step) * -2)">
+        <img class="hsph" src="assets/family.webp" alt="" width="1408" height="768" style="animation-delay:calc(var(--step) * -1)">
       </div>
     </div>
   </section>
 
   <div class="wrap">
     <div class="marquee">
-      <div class="mqrow"><a href="#/services" data-svc="svc-consulting">Consumer &amp; Business Consulting</a><i class="b">/</i><a href="#/services" data-svc="svc-education">Education for All Stages and Ages</a></div>
-      <div class="mqrow"><a href="#/services" data-svc="svc-websites">Comprehensive A&ndash;Z Website Management</a><i class="g">/</i><a href="#/services" data-svc="svc-automation">Process &amp; Task Automations</a></div>
-      <div class="mqrow"><a href="#/services" data-svc="svc-applications">Turnkey Application Development &amp; Sustainment</a><i class="b">/</i><a href="#/services" data-svc="svc-design">Graphic Design</a></div>
-      <div class="mqrow"><a href="#/services" data-svc="svc-bizdev">Business Development &amp; Advertising</a></div>
+      <div class="mqrow"><a href="#/services" data-svc="svc-consulting">Consumer &amp; Business Consulting</a><i class="b">/</i><a href="#/services" data-svc="svc-education">Education for All Stages and Ages</a><i class="g">/</i><a href="#/services" data-svc="svc-design">Graphic Design</a><i class="b">/</i><a href="#/services" data-svc="svc-automation">Process &amp; Task Automations</a></div>
+      <div class="mqrow"><a href="#/services" data-svc="svc-websites">Comprehensive A&ndash;Z Website Management</a><i class="g">/</i><a href="#/services" data-svc="svc-applications">Turnkey Application Development &amp; Sustainment</a><i class="b">/</i><a href="#/services" data-svc="svc-bizdev">Business Development &amp; Advertising</a></div>
     </div>
   </div>
 
@@ -1203,10 +1205,8 @@ a.val:hover{color:var(--blue-tx)}
 
   <div class="wrap">
     <div class="marquee">
-      <div class="mqrow"><a href="#/services" data-svc="svc-consulting">Consumer &amp; Business Consulting</a><i class="b">/</i><a href="#/services" data-svc="svc-education">Education for All Stages and Ages</a></div>
-      <div class="mqrow"><a href="#/services" data-svc="svc-websites">Comprehensive A&ndash;Z Website Management</a><i class="g">/</i><a href="#/services" data-svc="svc-automation">Process &amp; Task Automations</a></div>
-      <div class="mqrow"><a href="#/services" data-svc="svc-applications">Turnkey Application Development &amp; Sustainment</a><i class="b">/</i><a href="#/services" data-svc="svc-design">Graphic Design</a></div>
-      <div class="mqrow"><a href="#/services" data-svc="svc-bizdev">Business Development &amp; Advertising</a></div>
+      <div class="mqrow"><a href="#/services" data-svc="svc-consulting">Consumer &amp; Business Consulting</a><i class="b">/</i><a href="#/services" data-svc="svc-education">Education for All Stages and Ages</a><i class="g">/</i><a href="#/services" data-svc="svc-design">Graphic Design</a><i class="b">/</i><a href="#/services" data-svc="svc-automation">Process &amp; Task Automations</a></div>
+      <div class="mqrow"><a href="#/services" data-svc="svc-websites">Comprehensive A&ndash;Z Website Management</a><i class="g">/</i><a href="#/services" data-svc="svc-applications">Turnkey Application Development &amp; Sustainment</a><i class="b">/</i><a href="#/services" data-svc="svc-bizdev">Business Development &amp; Advertising</a></div>
     </div>
   </div>
 
