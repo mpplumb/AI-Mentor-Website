@@ -32,6 +32,8 @@
   --mission:#27608F;
   --cream:#FAF4E6;
   --cta:#1E4C78;
+  --lgreen:#E3FAEE;
+  --lblue:#D2ECFE;
   --nav-h:63px;
   --max:1760px;
 }
@@ -49,6 +51,8 @@
     --mission:#1A4663;
     --cream:#141109;
     --cta:#15375A;
+    --lgreen:#082015;
+    --lblue:#07202F;
   }
 }
 :root[data-theme="dark"]{
@@ -64,6 +68,8 @@
   --mission:#1A4663;
   --cream:#141109;
   --cta:#15375A;
+  --lgreen:#082015;
+  --lblue:#07202F;
 }
 
 *{box-sizing:border-box}
@@ -131,9 +137,12 @@ img{max-width:100%;display:block}
     inset 0 1px 0 rgba(255,255,255,1),
     inset 0 -1px 0 rgba(255,255,255,.8),
     inset 0 -3px 6px rgba(74,58,24,.12),
+    0 0 0 1px rgba(255,243,214,.5),
+    0 0 14px 2px rgba(255,236,190,.55),
+    0 0 34px 6px rgba(255,228,160,.32),
     -2px 2px 3px rgba(10,27,51,.26),
-    -4px 7px 13px -3px rgba(10,27,51,.36),
-    -7px 15px 26px -10px rgba(10,27,51,.5);
+    -4px 7px 13px -3px rgba(10,27,51,.3),
+    -7px 15px 26px -10px rgba(10,27,51,.42);
   text-shadow:0 1px 0 rgba(255,255,255,.85);
 }
 .btn-cream:hover{
@@ -144,9 +153,12 @@ img{max-width:100%;display:block}
     inset 0 1px 0 rgba(255,255,255,1),
     inset 0 -1px 0 rgba(255,255,255,.85),
     inset 0 -3px 6px rgba(74,58,24,.12),
+    0 0 0 1px rgba(255,246,222,.65),
+    0 0 20px 4px rgba(255,238,195,.75),
+    0 0 48px 10px rgba(255,226,150,.45),
     -3px 3px 4px rgba(10,27,51,.28),
-    -6px 11px 19px -3px rgba(10,27,51,.4),
-    -10px 22px 36px -10px rgba(10,27,51,.56);
+    -6px 11px 19px -3px rgba(10,27,51,.34),
+    -10px 22px 36px -10px rgba(10,27,51,.48);
 }
 .btn-cream:active{
   background:linear-gradient(180deg,#EADFC4 0%,#F4ECDA 52%,#FBF7EC 100%);
@@ -523,48 +535,9 @@ a.row:hover h3{color:var(--blue-tx)}
 }
 @media(max-width:860px){.protect .cols .c:not(:last-child)::after{display:none}}
 
-/* ---- AI overview: shorter Myths + Glossary rules ---- */
-#sec-myths .pair .item{border-top:0;position:relative}
-#sec-myths .pair .item::before{
-  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:58%;border-top:1px solid rgba(255,255,255,.4);
-}
-#sec-glossary .row{border-top:0;position:relative}
-#sec-glossary .row::before{
-  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:58%;border-top:1px solid rgba(11,29,44,.18);
-}
-#sec-glossary .row:last-child{border-bottom:0}
-#sec-glossary .row:last-child::after{
-  content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-  width:58%;border-top:1px solid rgba(11,29,44,.18);
-}
-/* ---- AI overview: fun facts, one centred card then two per row ---- */
-#sec-facts .facts{grid-template-columns:repeat(2,minmax(0,1fr));max-width:1000px;gap:26px}
-#sec-facts .fact:first-child{grid-column:1 / -1;max-width:640px;margin:0 auto}
-@media(max-width:700px){#sec-facts .facts{grid-template-columns:1fr}}
-
-/* ---- strategy: axis dividers inset top and bottom ---- */
-#sec-framework .cols .c{border-right:0;position:relative}
-#sec-framework .cols .c:not(:last-child)::after{
-  content:"";position:absolute;right:0;top:16%;height:68%;
-  border-right:1px solid rgba(11,29,44,.18);
-}
-@media(max-width:860px){#sec-framework .cols .c:not(:last-child)::after{display:none}}
-/* ---- strategy: round bullets instead of dashes ---- */
-#sec-framework .block li::before{
-  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
-  border:0;background:rgba(11,29,44,.5);
-  vertical-align:middle;margin:-2px 12px 0 0;
-}
-/* ---- strategy: tighter arc ---- */
-#sec-arc .rows .row{padding:15px 0}
-#sec-arc .row p{max-width:58ch;margin-top:10px}
-#sec-arc .row h3{margin-top:6px}
-
 /* ---- contact: stacked, white form then grey owner block ---- */
-#inq-form{background:var(--paper);padding:64px 0 74px}
-#inq-owner{background:#E3F3F7;border-top:1px solid var(--hair);padding:64px 0 72px}
+#inq-form{padding:64px 0 74px}
+#inq-owner{background:var(--lblue);border-top:1px solid var(--hair);padding:64px 0 72px}
 #inq-form form{max-width:760px;margin:0 auto}
 #inq-owner aside{max-width:1040px;margin:0 auto}
 .ownergrid{
@@ -579,42 +552,6 @@ a.row:hover h3{color:var(--blue-tx)}
   .ownergrid .portrait{order:-1}
 }
 #v-contact .calline{max-width:60ch;margin:22px auto 34px;font-size:16.5px}
-
-/* ===== AI OVERVIEW PAGE ===== */
-/* every reality-check card the same height, in both columns */
-#v-overview .pair.soft .item{display:flex;flex-direction:column}
-#v-overview .pair.soft ul{flex:1;display:grid;grid-auto-rows:1fr;gap:10px}
-#v-overview .pair.soft li{justify-content:center}
-#v-overview .pair.soft li span{min-height:3.24em;display:flex;align-items:center;justify-content:center;text-align:center}
-
-/* good = light green, not-worth-it = light red (fixed, legible in both themes) */
-#v-overview .pair.soft .item:first-of-type li{background:#E7F8EE}
-#v-overview .pair.soft .item:last-of-type li{background:#FDECEA}
-#v-overview .pair.soft li b{color:#0B1D2C}
-#v-overview .pair.soft li span{color:#4A5A66}
-
-/* Myths — black band, white type */
-#sec-myths{background:#0B0D10;border-top:2px solid #0B0D10;border-bottom:2px solid #0B0D10}
-#sec-myths h2{color:#FFFFFF}
-#sec-myths .kick{color:#7FD8FF}
-#sec-myths .kick{font-size:48px;letter-spacing:.18em}
-@media(max-width:640px){#sec-myths .kick{font-size:30px;letter-spacing:.14em}}
-#sec-myths .sec-kick .bar{background:rgba(255,255,255,.22);flex:none;width:clamp(50px,7vw,130px)}
-#sec-myths .pair .item{border-top-color:rgba(255,255,255,.4)}
-#sec-myths .pair h3{color:#FFFFFF}
-#sec-myths .pair p{color:#B9C4CE}
-
-/* Fun facts — light pink band */
-#sec-facts{background:#FCEEF3;border-top:2px solid var(--line);border-bottom:2px solid var(--line)}
-#sec-facts h2{color:#0B1D2C}
-#sec-facts .sub{color:#4A5A66}
-#sec-facts .kick{color:#0A6CB4}
-#sec-facts .sec-kick .bar{background:rgba(11,29,44,.18)}
-#sec-facts .fact{background:#FFFFFF;border-color:#0B1D2C}
-#sec-facts .fact h3{color:#0B1D2C}
-#sec-facts .fact p{color:#4A5A66}
-#sec-facts .fact .n{color:#0A6CB4;font-size:23px;letter-spacing:.14em}
-@media(max-width:640px){#sec-facts .fact .n{font-size:16px}}
 
 /* ===== SERVICES PAGE — one tint per service ===== */
 /* "What it covers": no rules, small round bullets, one per row */
@@ -661,115 +598,6 @@ a.row:hover h3{color:var(--blue-tx)}
 .sv-black .block{border-top-color:rgba(255,255,255,.4)}
 .sv-black .block li{border-bottom-color:rgba(255,255,255,.16)}
 .sv-black .block li:first-child{border-top-color:rgba(255,255,255,.16)}
-
-/* ===== STRATEGY & APPROACH PAGE (extras) ===== */
-/* the first divider in each list is a short tick, the rest run full width */
-#sec-principles .rows .row:first-child,
-#sec-arc .rows .row:first-child{border-top:0;position:relative}
-#sec-principles .rows .row:first-child::before,
-#sec-arc .rows .row:first-child::before{
-  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:clamp(110px,20%,300px);border-top:1px solid rgba(255,255,255,.3);
-}
-/* every other divider in these two sections: centred, 58% wide */
-#sec-principles .rows .row:not(:first-child),
-#sec-arc .rows .row:not(:first-child){border-top:0;position:relative}
-#sec-principles .rows .row:not(:first-child)::before,
-#sec-arc .rows .row:not(:first-child)::before{
-  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:58%;border-top:1px solid rgba(255,255,255,.22);
-}
-#sec-principles .rows .row:last-child,
-#sec-arc .rows .row:last-child{border-bottom:0}
-#sec-principles .rows .row:last-child::after,
-#sec-arc .rows .row:last-child::after{
-  content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-  width:58%;border-top:1px solid rgba(255,255,255,.22);
-}
-#sec-sayno .pair .item:first-of-type{border-top:0;position:relative}
-#sec-sayno .pair .item:first-of-type::before{
-  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:clamp(110px,34%,260px);border-top:2px solid #0B1D2C;
-}
-/* bigger axis labels */
-#sec-framework .cols .c .n{font-size:22px;letter-spacing:.14em}
-@media(max-width:640px){#sec-framework .cols .c .n{font-size:16px}}
-/* "What comes out of it" — no rules, one uniform dash per item */
-#sec-framework .block li{border-top:0 !important;border-bottom:0 !important;padding:11px 0}
-#sec-framework .block li::before{
-  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
-  border:0;background:rgba(11,29,44,.5);
-  vertical-align:middle;margin:-2px 12px 0 0;
-}
-/* shorter rules between the say-no items (the first one keeps its own tick) */
-#sec-sayno .pair .item:not(:first-of-type){border-top:0;position:relative}
-#sec-sayno .pair .item:not(:first-of-type)::before{
-  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:60%;border-top:2px solid #0B1D2C;
-}
-
-/* ===== STRATEGY & APPROACH PAGE ===== */
-/* Principles — black band, white type */
-#sec-principles{background:#0B0D10;border-top:2px solid #0B0D10;border-bottom:2px solid #0B0D10}
-#sec-principles h2{color:#FFFFFF}
-#sec-principles .sub{color:#B9C4CE}
-#sec-principles .kick{color:#7FD8FF}
-#sec-principles .sec-kick .bar{background:rgba(255,255,255,.22)}
-#sec-principles .row{border-top-color:rgba(255,255,255,.18)}
-#sec-principles .row:last-child{border-bottom-color:rgba(255,255,255,.18)}
-#sec-principles .row h3{color:#FFFFFF}
-#sec-principles .row p{color:#B9C4CE}
-#sec-principles .row .n{color:#7FD8FF;font-size:36px;letter-spacing:.14em}
-@media(max-width:640px){#sec-principles .row .n{font-size:24px}}
-
-/* The framework — light grey */
-#sec-framework{background:#ECEFF2;border-top:2px solid var(--line);border-bottom:2px solid var(--line)}
-#sec-framework h2,#sec-framework .block h3{color:#0B1D2C}
-#sec-framework .sub,#sec-framework .block li{color:#4A5A66}
-#sec-framework .block li strong{color:#0B1D2C}
-#sec-framework .kick{color:#0A6CB4}
-#sec-framework .sec-kick .bar{background:rgba(11,29,44,.18)}
-#sec-framework .cols{border-top-color:#0B1D2C}
-#sec-framework .cols .c{border-right-color:rgba(11,29,44,.16)}
-#sec-framework .cols .c h3{color:#0B1D2C}
-#sec-framework .cols .c p{color:#4A5A66}
-#sec-framework .cols .c .n{color:#0A6CB4}
-#sec-framework .block{border-top-color:#0B1D2C}
-#sec-framework .block li{border-bottom-color:rgba(11,29,44,.14)}
-#sec-framework .block li:first-child{border-top-color:rgba(11,29,44,.14)}
-
-/* The arc — navy */
-#sec-arc{background:var(--deep);border-top:2px solid var(--deep);border-bottom:2px solid var(--deep)}
-#sec-arc h2{color:#FFFFFF}
-#sec-arc .sub{color:#A9C0D4}
-#sec-arc .kick{color:#7FD8FF}
-#sec-arc .sec-kick .bar{background:rgba(255,255,255,.22)}
-#sec-arc .row{border-top-color:rgba(255,255,255,.18)}
-#sec-arc .row:last-child{border-bottom-color:rgba(255,255,255,.18)}
-#sec-arc .row h3{color:#FFFFFF}
-#sec-arc .row p{color:#A9C0D4}
-#sec-arc .row .n{color:#7FD8FF}
-
-/* When I say no — light grey */
-#sec-sayno{background:#ECEFF2;border-top:2px solid var(--line);border-bottom:2px solid var(--line)}
-#sec-sayno h2{color:#0B1D2C}
-#sec-sayno .sub{color:#4A5A66}
-#sec-sayno .kick{color:#0A6CB4}
-#sec-sayno .sec-kick .bar{background:rgba(11,29,44,.18)}
-#sec-sayno .pair .item{border-top-color:#0B1D2C}
-#sec-sayno .pair h3{color:#0B1D2C}
-#sec-sayno .pair p{color:#4A5A66}
-
-/* Glossary — light grey band */
-#sec-glossary{background:#ECEFF2;border-top:2px solid var(--line);border-bottom:2px solid var(--line)}
-#sec-glossary h2{color:#0B1D2C}
-#sec-glossary .kick{color:#0A6CB4}
-#sec-glossary .sec-kick .bar{background:rgba(11,29,44,.18)}
-#sec-glossary .row{border-top-color:rgba(11,29,44,.14)}
-#sec-glossary .row:last-child{border-bottom-color:rgba(11,29,44,.14)}
-#sec-glossary .row h3{color:#0B1D2C}
-#sec-glossary .row p{color:#4A5A66}
-#sec-glossary .row .n{color:#0A6CB4}
 
 /* soft, centred term blocks */
 .pair.soft{gap:clamp(26px,3.4vw,54px)}
@@ -925,6 +753,140 @@ a.val:hover{color:var(--blue-tx)}
   .wrap{padding:0 22px}
   .band{padding:56px 0}
 }
+
+
+/* ---- the two coloured bands that stay ---- */
+
+
+/* ================= SECTION PATTERNS (pages 2-5) ================= */
+/* 01 split canvas */
+.p-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(32px,4.6vw,76px);align-items:center;text-align:left;margin-top:8px}
+.p-split.flip .p-vis{order:-1}
+@media(max-width:880px){.p-split{grid-template-columns:1fr;gap:34px}
+  .p-split.flip .p-vis{order:0}}
+.p-split h2{text-align:left;margin:0;max-width:18ch}
+.p-split .kick{text-align:left}
+.p-split p{margin:20px 0 0;max-width:54ch;font-size:17px;line-height:1.72}
+.p-panel{background:var(--paper);border:1px solid var(--hair);border-radius:14px;
+  padding:28px 28px 30px;box-shadow:0 1px 2px rgba(10,27,51,.05),0 22px 44px -32px rgba(10,27,51,.5)}
+.p-panel .pl{display:block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--body)}
+.p-panel .pt{font-family:"IBM Plex Mono",monospace;font-size:14.5px;color:var(--ink);
+  margin:10px 0 0;line-height:1.55}
+.p-panel .parrow{display:block;text-align:center;color:var(--blue-tx);font-size:20px;margin:18px 0 16px}
+.p-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+.p-chips span{font-family:"IBM Plex Mono",monospace;font-size:12px;background:#E6F2FD;
+  color:#08598F;border-radius:99px;padding:6px 12px}
+.p-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.p-list li{padding:15px 0;border-top:1px solid var(--hair);font-size:16px;line-height:1.62;
+  text-align:left;display:flex;gap:13px}
+.p-list li:first-child{border-top:0;padding-top:0}
+.p-list li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;
+  background:var(--blue-tx);margin-top:.58em}
+.p-list li strong{color:var(--ink);font-weight:700}
+.p-split .p-vis .p-cap{font-family:"IBM Plex Mono",monospace;font-size:11px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--body);margin:0 0 16px;text-align:left}
+
+/* 08 editorial statement */
+.p-ed h2{margin:0 auto;text-align:center;max-width:17ch;
+  font-size:clamp(30px,5.4vw,66px);letter-spacing:-.04em;line-height:1.08}
+.p-ed .cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(24px,3.2vw,52px);margin-top:46px;padding-top:30px;border-top:2px solid var(--line)}
+.p-ed .cols3.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.p-ed .cols3.five{display:flex;flex-wrap:wrap;justify-content:center;
+  gap:clamp(24px,3vw,46px) clamp(26px,3.4vw,54px)}
+.p-ed .cols3.five > div{flex:0 1 clamp(230px,27%,330px)}
+@media(max-width:980px){.p-ed .cols3,.p-ed .cols3.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.p-ed .cols3,.p-ed .cols3.four{grid-template-columns:1fr;gap:26px}
+  .p-ed .cols3.five > div{flex:1 1 100%}}
+.p-ed .cols3 .n{display:block;font-family:"IBM Plex Mono",monospace;font-size:19px;
+  letter-spacing:.14em;color:var(--blue-tx);margin-bottom:9px}
+.p-ed .cols3 b{font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;color:var(--ink);
+  font-size:17px;letter-spacing:-.025em;display:block;line-height:1.22}
+.p-ed .cols3 p{margin:10px 0 0;font-size:15.5px;line-height:1.62}
+
+/* 09 verdict table */
+.p-table{width:100%;border-collapse:collapse;margin-top:40px;font-size:16.5px;
+  max-width:860px;margin-left:auto;margin-right:auto}
+.p-table th{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--body);text-align:left;padding:0 0 14px;
+  border-bottom:2px solid var(--line);font-weight:400}
+.p-table th:last-child{text-align:right}
+.p-table td{padding:17px 0;border-bottom:1px solid var(--hair);color:var(--ink);
+  text-align:left;line-height:1.5}
+.p-table td:last-child{text-align:right;white-space:nowrap;padding-left:18px}
+.p-table td .sm{display:block;color:var(--body);font-size:14.5px;margin-top:4px;font-weight:400}
+.p-yes,.p-no{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;
+  text-transform:uppercase;border-radius:99px;padding:5px 13px;display:inline-block}
+.p-yes{background:#E3F6EB;color:#0A7A3C}
+.p-no{background:#FBE9E6;color:#A33522}
+
+/* 10 glass on mesh */
+.p-mesh{background:
+  radial-gradient(ellipse 58% 68% at 10% 16%,rgba(44,174,248,.5),transparent 62%),
+  radial-gradient(ellipse 54% 64% at 88% 22%,rgba(0,224,100,.4),transparent 64%),
+  radial-gradient(ellipse 72% 62% at 50% 102%,rgba(27,72,112,.62),transparent 70%),
+  #0C2233;
+  border-top:2px solid var(--line);border-bottom:2px solid var(--line)}
+.p-glass{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.26);
+  border-radius:18px;padding:clamp(28px,3.6vw,46px) clamp(22px,3.4vw,46px) clamp(32px,3.8vw,50px);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  box-shadow:0 28px 70px -34px rgba(0,0,0,.75);max-width:1060px;margin:0 auto}
+.p-mesh .kick{color:#9FE4FF}
+.p-mesh h2{color:#fff;margin:0 auto;max-width:22ch}
+.p-mesh .sub{color:#D7E6F2}
+.p-gitems{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(18px,2.6vw,34px);margin-top:38px;text-align:left}
+.p-gitems.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:860px){.p-gitems,.p-gitems.three{grid-template-columns:1fr;gap:22px}}
+.p-gitems .gi{border-top:1px solid rgba(255,255,255,.26);padding-top:16px}
+.p-gitems .gi .n{font-family:"IBM Plex Mono",monospace;font-size:15px;letter-spacing:.14em;color:#8CF7BE}
+.p-gitems .gi h3{font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;color:#fff;
+  font-size:18px;letter-spacing:-.025em;margin:9px 0 0;line-height:1.22}
+.p-gitems .gi p{color:#CBDDEC;font-size:15px;line-height:1.6;margin:9px 0 0}
+.p-grow{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;justify-content:center}
+.p-grow span{font-family:"IBM Plex Mono",monospace;font-size:12px;color:#EAF4FB;
+  border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:7px 15px}
+
+/* neutral grounds for the rebuilt pages */
+.p-white{background:var(--paper)}
+/* tinted from the logo's own blue and green, each lit from one corner */
+.p-green,.p-blue{
+  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  position:relative;isolation:isolate;overflow:hidden;
+}
+.p-green{background:var(--lgreen)}
+.p-blue{background:var(--lblue)}
+.p-green::before,.p-blue::before{
+  content:"";position:absolute;inset:-12% -6%;z-index:-1;pointer-events:none;
+}
+.p-green::before{
+  background:
+    radial-gradient(ellipse 58% 72% at 14% 4%, rgba(0,224,100,.34), transparent 62%),
+    radial-gradient(ellipse 46% 60% at 92% 96%, rgba(44,174,248,.3), transparent 66%);
+}
+.p-blue::before{
+  background:
+    radial-gradient(ellipse 58% 72% at 86% 4%, rgba(44,174,248,.52), transparent 64%),
+    radial-gradient(ellipse 46% 60% at 8% 96%, rgba(0,224,100,.22), transparent 66%);
+}
+/* a thin lit edge along the top of every tinted band */
+.p-green::after,.p-blue::after{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;z-index:-1;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.9) 22%,rgba(255,255,255,.9) 78%,transparent);
+}
+.p-formcol{text-align:left}
+.p-formcol .field{align-items:stretch}
+.p-formcol .field label{text-align:left;font-size:13px;letter-spacing:.14em}
+.p-formcol .field input,.p-formcol .field select,.p-formcol .field textarea{
+  width:100%;margin:0;text-align:left;text-align-last:left}
+.p-formcol .field textarea{text-align:left}
+.p-formcol form{max-width:none;margin-top:42px}
+.p-formcol .btn{margin-top:4px}
+.p-formcol .form-msg{text-align:left}
+.p-soft{background:var(--grey);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -1049,441 +1011,323 @@ a.val:hover{color:var(--blue-tx)}
     <div class="wrap">
       <h1>AI, explained <span class="grad">without the hype.</span></h1>
       <p class="lede">Most of what business owners hear about AI is either a sales pitch or a scare story. Here's the plain version — what these systems actually are, what they're genuinely good at, and where they fall over.</p>
+      <div class="acts"><a class="btn btn-cream" href="#/contact">Learn More</a></div>
     </div>
   </section>
 
-  <section class="band band-alt">
+  <section class="band p-green" id="sec-short">
     <div class="wrap">
-      <div class="sec-kick"><span class="bar"></span><span class="kick">The short version</span><span class="bar"></span></div>
-      <h2>It's a very good pattern-matcher, not a mind.</h2>
-      <p class="sub">A large language model has read an enormous amount of text and learned which words tend to follow which. That's it — but it turns out an enormous amount of office work is exactly that: reading something, recognising what kind of thing it is, and writing the appropriate response. That's where the returns come from.</p>
-      <p class="sub">What it doesn't have is judgment, accountability, or any knowledge of your business beyond what you show it. It will answer confidently whether or not it's right. Every useful deployment treats that as a design constraint, not a footnote.</p>
+      <div class="p-split">
+        <div>
+          <span class="kick">The short version</span>
+          <h2>It&rsquo;s a very good pattern-matcher, not a mind.</h2>
+          <p>A large language model has read an enormous amount of text and learned which words tend to follow which. That&rsquo;s it &mdash; but it turns out an enormous amount of office work is exactly that: reading something, recognising what kind of thing it is, and writing the appropriate response. That&rsquo;s where the returns come from.</p>
+          <p>What it doesn&rsquo;t have is judgment, accountability, or any knowledge of your business beyond what you show it. It will answer confidently whether or not it&rsquo;s right. Every useful deployment treats that as a design constraint, not a footnote.</p>
+        </div>
+        <div class="p-vis">
+          <p class="p-cap">What that looks like in practice</p>
+          <div class="p-panel">
+            <span class="pl">Input</span>
+            <p class="pt">&ldquo;Invoice attached &mdash; net 30, due March 4, $2,480&rdquo;</p>
+            <span class="parrow">&darr;</span>
+            <span class="pl">Recognised</span>
+            <div class="p-chips"><span>invoice</span><span>net 30</span><span>2026-03-04</span><span>2480.00</span></div>
+            <span class="parrow">&darr;</span>
+            <span class="pl">Action</span>
+            <p class="pt">Filed to Accounts Payable. Reminder set for March 1. Flagged for human approval over $2,000.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="band">
+  <section class="band p-blue" id="sec-reality">
     <div class="wrap">
       <div class="sec-kick"><span class="bar"></span><span class="kick">Reality check</span><span class="bar"></span></div>
-      <h2>What it's good at, and what it isn't.</h2>
-      <div class="pair soft">
-        <div class="item">
-          <h3>Genuinely good at</h3>
-          <ul>
-            <li><b>Sorting and routing</b><span>Reading an email, form or ticket and deciding where it goes and who handles it.</span></li>
-            <li><b>First drafts</b><span>Replies, summaries, proposals, listings — anything a person reviews before it goes out.</span></li>
-            <li><b>Extracting structure</b><span>Pulling dates, amounts and names out of invoices, contracts and PDFs.</span></li>
-            <li><b>Answering from your documents</b><span>A handbook or catalogue turned into something staff can just ask.</span></li>
-            <li><b>Translating formats</b><span>Notes into a report, a transcript into action items, a sheet into a summary.</span></li>
-          </ul>
-        </div>
-        <div class="item">
-          <h3>Bad at, or not worth it</h3>
-          <ul>
-            <li><b>Anything that must be exactly right, unsupervised</b><span>Payroll, tax filings, medical or legal decisions.</span></li>
-            <li><b>Arithmetic and reconciliation</b><span>Use software that calculates; use AI to read the document feeding it.</span></li>
-            <li><b>Knowing today's facts</b><span>Without a live source it works from memory and will guess.</span></li>
-            <li><b>Work you do twice a year</b><span>The automation costs more than the hours it saves.</span></li>
-            <li><b>Replacing the person with judgment</b><span>It moves that person up the stack; it doesn't remove them.</span></li>
-          </ul>
+      <h2>What it&rsquo;s good at, and what it isn&rsquo;t.</h2>
+      <p class="sub">The same question, task by task. There is no prize for automating something that was never worth automating.</p>
+      <table class="p-table">
+        <thead><tr><th>The task</th><th>Worth it</th></tr></thead>
+        <tbody>
+          <tr><td>Sorting and routing<span class="sm">Reading an email, form or ticket and deciding where it goes and who handles it.</span></td><td><span class="p-yes">Yes</span></td></tr>
+          <tr><td>First drafts<span class="sm">Replies, summaries, proposals, listings &mdash; anything a person reviews before it goes out.</span></td><td><span class="p-yes">Yes</span></td></tr>
+          <tr><td>Extracting structure<span class="sm">Pulling dates, amounts and names out of invoices, contracts and PDFs.</span></td><td><span class="p-yes">Yes</span></td></tr>
+          <tr><td>Answering from your documents<span class="sm">A handbook or catalogue turned into something staff can just ask.</span></td><td><span class="p-yes">Yes</span></td></tr>
+          <tr><td>Translating formats<span class="sm">Notes into a report, a transcript into action items, a sheet into a summary.</span></td><td><span class="p-yes">Yes</span></td></tr>
+          <tr><td>Anything exact, unsupervised<span class="sm">Payroll, tax filings, medical or legal decisions.</span></td><td><span class="p-no">No</span></td></tr>
+          <tr><td>Arithmetic and reconciliation<span class="sm">Use software that calculates; use AI to read the document feeding it.</span></td><td><span class="p-no">No</span></td></tr>
+          <tr><td>Knowing today&rsquo;s facts<span class="sm">Without a live source it works from memory and will guess.</span></td><td><span class="p-no">No</span></td></tr>
+          <tr><td>Work you do twice a year<span class="sm">The automation costs more than the hours it saves.</span></td><td><span class="p-no">No</span></td></tr>
+          <tr><td>Replacing the person with judgment<span class="sm">It moves that person up the stack; it doesn&rsquo;t remove them.</span></td><td><span class="p-no">No</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="band p-mesh" id="sec-myths">
+    <div class="wrap">
+      <div class="p-glass">
+        <span class="kick">Myths</span>
+        <h2>Four things you can stop worrying about.</h2>
+        <div class="p-gitems">
+          <div class="gi"><span class="n">01</span><h3>&ldquo;We need our own AI model.&rdquo;</h3><p>Almost nobody does. Training a model from scratch costs millions and the general-purpose ones are better at nearly everything. What you need is good plumbing between an existing model and your own data.</p></div>
+          <div class="gi"><span class="n">02</span><h3>&ldquo;Our data will be used to train it.&rdquo;</h3><p>On business plans from the major providers, it generally isn&rsquo;t &mdash; but the specifics vary by vendor and plan. That&rsquo;s a question worth asking out loud before anything is connected, and one of the first things I check.</p></div>
+          <div class="gi"><span class="n">03</span><h3>&ldquo;It&rsquo;ll replace our staff.&rdquo;</h3><p>In practice it removes the parts of the job nobody wanted &mdash; the copying, the sorting, the chasing. The teams getting value from it are the ones where people stayed and stopped doing clerical work.</p></div>
+          <div class="gi"><span class="n">04</span><h3>&ldquo;It&rsquo;s too early / it&rsquo;s too late.&rdquo;</h3><p>Neither. The tools are stable enough to build real things on, and the businesses using them well are mostly doing unglamorous, well-scoped work anyone could start this quarter.</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  
-  <section class="band" id="sec-myths">
-    <div class="wrap">
-      <div class="sec-kick"><span class="bar"></span><span class="kick">Myths</span><span class="bar"></span></div>
-      <h2>Four things you can stop worrying about.</h2>
-      <div class="pair">
-        <div class="item">
-          <h3>"We need our own AI model."</h3>
-          <p>Almost nobody does. Training a model from scratch costs millions and the general-purpose ones are better at nearly everything. What you need is good plumbing between an existing model and your own data.</p>
-        </div>
-        <div class="item">
-          <h3>"Our data will be used to train it."</h3>
-          <p>On business plans from the major providers, it generally isn't — but the specifics vary by vendor and plan. That's a question worth asking out loud before anything is connected, and one of the first things I check.</p>
-        </div>
-        <div class="item">
-          <h3>"It'll replace our staff."</h3>
-          <p>In practice it removes the parts of the job nobody wanted — the copying, the sorting, the chasing. The teams getting value from it are the ones where people stayed and stopped doing clerical work.</p>
-        </div>
-        <div class="item">
-          <h3>"It's too early / it's too late."</h3>
-          <p>Neither. The tools are stable enough to build real things on, and the businesses using them well are mostly doing unglamorous, well-scoped work anyone could start this quarter.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="band" id="sec-facts">
-    <div class="wrap">
+  <section class="band p-green" id="sec-facts">
+    <div class="wrap p-ed">
       <div class="sec-kick"><span class="bar"></span><span class="kick">Fun facts</span><span class="bar"></span></div>
       <h2>Five things about AI worth knowing.</h2>
       <p class="sub">None of these will change your business plan. All of them are true, and they make the technology a lot less mysterious.</p>
-      <div class="facts">
-        <div class="fact">
-          <span class="n">01</span>
-          <h3>The field was supposed to take one summer</h3>
-          <p>The term "artificial intelligence" was coined in a 1955 proposal for a workshop at Dartmouth College. The authors asked for two months and ten men, and expected a significant advance. Seventy years later, people are still working on it.</p>
-        </div>
-        <div class="fact">
-          <span class="n">02</span>
-          <h3>"Robot" came from a play</h3>
-          <p>Czech writer Karel Čapek introduced the word in his 1920 play <em>R.U.R.</em> It comes from <em>robota</em> — forced labour. His brother Josef suggested it.</p>
-        </div>
-        <div class="fact">
-          <span class="n">03</span>
-          <h3>People trusted a chatbot in 1966</h3>
-          <p>ELIZA just rephrased your sentences back as questions. Its creator, Joseph Weizenbaum, was unsettled to find his own secretary asking for privacy to talk to it. We still call it the ELIZA effect.</p>
-        </div>
-        <div class="fact">
-          <span class="n">04</span>
-          <h3>Neural networks are older than the transistor</h3>
-          <p>McCulloch and Pitts published the first mathematical model of a neural network in 1943. Bell Labs didn't demonstrate the transistor until 1947.</p>
-        </div>
-        <div class="fact">
-          <span class="n">05</span>
-          <h3>It struggles to spell "strawberry"</h3>
-          <p>Ask a model how many R's are in strawberry and it often gets it wrong — it reads chunks called tokens, not individual letters. Brilliant at drafting your contract, fooled by a spelling-bee question.</p>
-        </div>
+      <div class="cols3 five">
+        <div><span class="n">01</span><b>The field was supposed to take one summer</b><p>The term was coined in a 1955 proposal for a workshop at Dartmouth College. The authors asked for two months and ten men. Seventy years later, people are still working on it.</p></div>
+        <div><span class="n">02</span><b>&ldquo;Robot&rdquo; came from a play</b><p>Karel &Ccaron;apek introduced the word in his 1920 play <i>R.U.R.</i> It comes from <i>robota</i> &mdash; forced labour. His brother Josef suggested it.</p></div>
+        <div><span class="n">03</span><b>People trusted a chatbot in 1966</b><p>ELIZA just rephrased your sentences back as questions. Its creator was unsettled to find his own secretary asking for privacy to talk to it.</p></div>
+        <div><span class="n">04</span><b>Neural networks are older than the transistor</b><p>McCulloch and Pitts published the first mathematical model in 1943. Bell Labs didn&rsquo;t demonstrate the transistor until 1947.</p></div>
+        <div><span class="n">05</span><b>It struggles to spell &ldquo;strawberry&rdquo;</b><p>Ask how many R&rsquo;s it has and it often gets it wrong &mdash; it reads chunks called tokens, not letters. Brilliant at drafting your contract, fooled by a spelling bee.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="band" id="sec-glossary">
+  <section class="band p-blue" id="sec-glossary">
     <div class="wrap">
-      <div class="sec-kick"><span class="bar"></span><span class="kick">Glossary</span><span class="bar"></span></div>
-      <h2>The words people use at you.</h2>
-      <div class="rows">
-        <div class="row"><span class="n">LLM</span><h3>Large language model</h3><p>The thing behind ChatGPT and Claude. Reads text, writes text. The engine, not the product.</p></div>
-        <div class="row"><span class="n">RAG</span><h3>Retrieval-augmented generation</h3><p>Giving the model your own documents to answer from, so it quotes your handbook instead of guessing.</p></div>
-        <div class="row"><span class="n">AGENT</span><h3>Agent</h3><p>A model that can take actions — send the email, update the record — not only write text. Useful, and worth a human checkpoint.</p></div>
-        <div class="row"><span class="n">TOKEN</span><h3>Token</h3><p>Roughly three-quarters of a word. It's how usage is billed, which is why long documents cost more to process.</p></div>
-        <div class="row"><span class="n">HALLUCINATION</span><h3>Hallucination</h3><p>When the model states something false with complete confidence. Managed with grounding and review steps, never fully eliminated.</p></div>
+      <div class="p-split flip">
+        <div class="p-vis">
+          <ul class="p-list">
+            <li><div><strong>LLM &mdash; large language model.</strong> The thing behind ChatGPT and Claude. Reads text, writes text. The engine, not the product.</div></li>
+            <li><div><strong>RAG &mdash; retrieval-augmented generation.</strong> Giving the model your own documents to answer from, so it quotes your handbook instead of guessing.</div></li>
+            <li><div><strong>Agent.</strong> A model that can take actions &mdash; send the email, update the record &mdash; not only write text. Useful, and worth a human checkpoint.</div></li>
+            <li><div><strong>Token.</strong> Roughly three-quarters of a word. It&rsquo;s how usage is billed, which is why long documents cost more to process.</div></li>
+            <li><div><strong>Hallucination.</strong> When the model states something false with complete confidence. Managed with grounding and review steps, never fully eliminated.</div></li>
+          </ul>
+        </div>
+        <div>
+          <span class="kick">Glossary</span>
+          <h2>The words people use at you.</h2>
+          <p>Five terms you will hear from any vendor inside the first ten minutes. None of them are complicated once somebody says them in English.</p>
+          <p>If anyone uses one of these to make something sound harder than it is, that tells you something about the vendor.</p>
+        </div>
       </div>
     </div>
   </section>
 
 </div>
 
-<!-- ==================== STRATEGY & APPROACH ==================== -->
 <div class="view" id="v-strategy" hidden>
 
   <section class="hero">
     <div class="wrap">
       <h1>Scope it before <span class="grad">you build it.</span></h1>
       <p class="lede">The technology is rarely the hard part. The hard part is choosing the right work to automate, in the right order, and making sure somebody still owns it a year from now. Here's how that's done.</p>
-      <div class="acts"><a class="btn btn-fill" href="#/contact">Start with a call</a></div>
+      <div class="acts"><a class="btn btn-cream" href="#/contact">Start With A Call</a></div>
     </div>
   </section>
 
-  <section class="band" id="sec-principles">
+  <section class="band p-mesh" id="sec-principles">
     <div class="wrap">
-      <div class="sec-kick"><span class="bar"></span><span class="kick">Principles</span><span class="bar"></span></div>
-      <h2>Five rules AI Mentor does not bend.</h2>
-      <div class="rows">
-        <div class="row">
-          <span class="n">01</span><h3>Measure before, or don't bother</h3>
-          <p>Every engagement starts with a baseline — how many hours, how many errors, how long the turnaround is today. Without that number, nobody can say later whether it worked, and the project quietly loses its budget.</p>
-        </div>
-        <div class="row">
-          <span class="n">02</span><h3>You own everything</h3>
-          <p>Built in your accounts, your infrastructure, your logins. No proprietary platform you have to keep renting to keep the lights on, and no dependency on me a year from now.</p>
-        </div>
-        <div class="row">
-          <span class="n">03</span><h3>Teach while building</h3>
-          <p>Your people are in the room while it's built, not handed a finished box. The difference between a system that survives and one that dies is whether somebody inside understands it.</p>
-        </div>
-        <div class="row">
-          <span class="n">04</span><h3>A human stays where the risk is</h3>
-          <p>Anything with money, legal exposure or a customer relationship attached gets a review step by design. Automation that removes the last human from a risky decision is how businesses get hurt.</p>
-        </div>
-        <div class="row">
-          <span class="n">05</span><h3>Small and shipped beats big and pending</h3>
-          <p>One workflow live in three weeks teaches you more than a six-month roadmap. The first build is chosen for speed to proof, not for how impressive it sounds.</p>
+      <div class="p-glass">
+        <span class="kick">Principles</span>
+        <h2>Five rules AI Mentor does not bend.</h2>
+        <div class="p-gitems">
+          <div class="gi"><span class="n">01</span><h3>Measure before, or don&rsquo;t bother</h3><p>Every engagement starts with a baseline &mdash; how many hours, how many errors, how long the turnaround is today. Without that number, nobody can say later whether it worked.</p></div>
+          <div class="gi"><span class="n">02</span><h3>You own everything</h3><p>Built in your accounts, your infrastructure, your logins. No proprietary platform you have to keep renting, and no dependency on me a year from now.</p></div>
+          <div class="gi"><span class="n">03</span><h3>Teach while building</h3><p>Your people are in the room while it&rsquo;s built, not handed a finished box. The difference between a system that survives and one that dies is whether somebody inside understands it.</p></div>
+          <div class="gi"><span class="n">04</span><h3>A human stays where the risk is</h3><p>Anything with money, legal exposure or a customer relationship attached gets a review step by design. Removing the last human from a risky decision is how businesses get hurt.</p></div>
+          <div class="gi"><span class="n">05</span><h3>Small and shipped beats big and pending</h3><p>One workflow live in three weeks teaches you more than a six-month roadmap. The first build is chosen for speed to proof, not for how impressive it sounds.</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="band" id="sec-framework">
+  <section class="band p-green" id="sec-framework">
     <div class="wrap">
-      <div class="sec-kick"><span class="bar"></span><span class="kick">The framework</span><span class="bar"></span></div>
-      <h2>Every process gets three scores.</h2>
-      <p class="sub">Before anything is built, your work gets mapped and each process is scored on the same three axes. The shortlist falls out of the numbers rather than out of whoever complained loudest.</p>
-      <div class="cols">
-        <div class="c">
-          <span class="n">Axis 01</span>
-          <h3>Volume</h3>
-          <p>How often does it happen, and how long does it take each time? A ten-minute task done forty times a week is a far better target than a two-day task done twice a year.</p>
+      <div class="p-split">
+        <div>
+          <span class="kick">The framework</span>
+          <h2>Every process gets three scores.</h2>
+          <p>Before anything is built, your work gets mapped and each process is scored on the same three axes. The shortlist falls out of the numbers rather than out of whoever complained loudest.</p>
+          <p><strong>What comes out of it:</strong> a ranked shortlist with the reasoning written down, an explicit do-not-automate list, a first build chosen for fastest credible proof, and the baseline numbers you&rsquo;ll measure against.</p>
         </div>
-        <div class="c">
-          <span class="n">Axis 02</span>
-          <h3>Judgment</h3>
-          <p>How much real decision-making is involved? Low-judgment, high-volume work automates cleanly. High-judgment work gets assistance, not automation.</p>
+        <div class="p-vis">
+          <p class="p-cap">The three axes</p>
+          <div class="p-panel">
+            <ul class="p-list">
+              <li><div><strong>Volume.</strong> How often does it happen, and how long does it take each time? A ten-minute task done forty times a week is a far better target than a two-day task done twice a year.</div></li>
+              <li><div><strong>Judgment.</strong> How much real decision-making is involved? Low-judgment, high-volume work automates cleanly. High-judgment work gets assistance, not automation.</div></li>
+              <li><div><strong>Blast radius.</strong> What happens when it goes wrong? A mis-sorted email costs a minute. A mis-filed invoice costs money and trust. The score decides how much review gets designed in.</div></li>
+            </ul>
+          </div>
         </div>
-        <div class="c">
-          <span class="n">Axis 03</span>
-          <h3>Blast radius</h3>
-          <p>What happens when it goes wrong? A mis-sorted email costs a minute. A mis-filed invoice costs money and trust. The score decides how much review gets designed in.</p>
-        </div>
-      </div>
-      <div class="block">
-        <h3>What comes out of it</h3>
-        <ul>
-          <li>A ranked shortlist of processes, with the reasoning written down</li>
-          <li>An explicit <strong>do-not-automate</strong> list — the work that should stay human, and why</li>
-          <li>A first build chosen for fastest credible proof, not biggest headline</li>
-          <li>The baseline numbers you'll measure the result against</li>
-        </ul>
       </div>
     </div>
   </section>
 
-  <section class="band" id="sec-arc">
-    <div class="wrap">
+  <section class="band p-blue" id="sec-arc">
+    <div class="wrap p-ed">
       <div class="sec-kick"><span class="bar"></span><span class="kick">The arc</span><span class="bar"></span></div>
       <h2>What a full engagement looks like.</h2>
-      <p class="sub">Most clients start with a single hour and never need this. For the ones who do, the shape is the same every time — and each phase ends with something you can hold.</p>
-      <div class="rows">
-        <div class="row">
-          <span class="n">WEEK 1–2</span><h3>Map</h3>
-          <p>Shadow the real work, not the org chart version of it. Score every process on volume, judgment and blast radius. You get the ranked shortlist and the do-not-automate list.</p>
-        </div>
-        <div class="row">
-          <span class="n">WEEK 3–5</span><h3>Prove</h3>
-          <p>Build one workflow end to end on real work. Measure the hours before and the hours after. If the number doesn't move, we stop and pick differently — that's a success, not a failure.</p>
-        </div>
-        <div class="row">
-          <span class="n">WEEK 6–10</span><h3>Extend &amp; teach</h3>
-          <p>Build out the next two or three while your team works alongside. By the end they're building and I'm reviewing, rather than the other way around.</p>
-        </div>
-        <div class="row">
-          <span class="n">WEEK 11–13</span><h3>Hand over</h3>
-          <p>Runbooks, a named internal owner, a review rhythm, and documentation another developer could pick up tomorrow. Then either I stay on for administration, or I leave.</p>
-        </div>
+      <p class="sub">Most clients start with a single hour and never need this. For the ones who do, the shape is the same every time &mdash; and each phase ends with something you can hold.</p>
+      <div class="cols3 four">
+        <div><span class="n">Week 1&ndash;2</span><b>Map</b><p>Shadow the real work, not the org chart version of it. Score every process on volume, judgment and blast radius. You get the ranked shortlist and the do-not-automate list.</p></div>
+        <div><span class="n">Week 3&ndash;5</span><b>Prove</b><p>Build one workflow end to end on real work. Measure the hours before and after. If the number doesn&rsquo;t move, we stop and pick differently &mdash; that&rsquo;s a success, not a failure.</p></div>
+        <div><span class="n">Week 6&ndash;10</span><b>Extend &amp; teach</b><p>Build out the next two or three while your team works alongside. By the end they&rsquo;re building and I&rsquo;m reviewing, rather than the other way around.</p></div>
+        <div><span class="n">Week 11&ndash;13</span><b>Hand over</b><p>Runbooks, a named internal owner, a review rhythm, and documentation another developer could pick up tomorrow. Then either I stay on for administration, or I leave.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="band" id="sec-sayno">
+  <section class="band p-green" id="sec-sayno">
     <div class="wrap">
-      <div class="sec-kick"><span class="bar"></span><span class="kick">When AI Mentor Says No</span><span class="bar"></span></div>
+      <div class="sec-kick"><span class="bar"></span><span class="kick">When AI Mentor says no</span><span class="bar"></span></div>
       <h2>Work AI Mentor will talk you out of.</h2>
       <p class="sub">Turning down the wrong project is cheaper for both of us than delivering it. These come up often enough to list.</p>
-      <div class="pair">
-        <div class="item">
-          <h3>Automating a broken process</h3>
-          <p>If the procedure itself doesn't make sense, automating it just produces the wrong answer faster and makes it harder to fix. The process gets straightened out first — sometimes that's the whole project.</p>
-        </div>
-        <div class="item">
-          <h3>Buying before scoping</h3>
-          <p>Nobody needs another subscription before anyone has established what problem it solves. Most businesses already own most of what they need and aren't using it.</p>
-        </div>
-        <div class="item">
-          <h3>Unsupervised high-stakes decisions</h3>
-          <p>Anything where a confident wrong answer causes real harm — legal, medical, financial filings. Assistance yes, autonomy no, regardless of what the demo showed.</p>
-        </div>
-        <div class="item">
-          <h3>Projects with no owner</h3>
-          <p>If nobody inside the business will own the result after handover, it will be dead within six months. I'd rather find that out in week one than deliver into a vacuum.</p>
-        </div>
-      </div>
+      <table class="p-table">
+        <thead><tr><th>What gets proposed</th><th>Answer</th></tr></thead>
+        <tbody>
+          <tr><td>Automating a broken process<span class="sm">If the procedure doesn&rsquo;t make sense, automating it produces the wrong answer faster and makes it harder to fix. The process gets straightened out first &mdash; sometimes that&rsquo;s the whole project.</span></td><td><span class="p-no">No</span></td></tr>
+          <tr><td>Buying before scoping<span class="sm">Nobody needs another subscription before anyone has established what problem it solves. Most businesses already own most of what they need and aren&rsquo;t using it.</span></td><td><span class="p-no">No</span></td></tr>
+          <tr><td>Unsupervised high-stakes decisions<span class="sm">Anything where a confident wrong answer causes real harm &mdash; legal, medical, financial filings. Assistance yes, autonomy no, regardless of what the demo showed.</span></td><td><span class="p-no">No</span></td></tr>
+          <tr><td>Projects with no owner<span class="sm">If nobody inside the business will own the result after handover, it will be dead within six months. I&rsquo;d rather find that out in week one than deliver into a vacuum.</span></td><td><span class="p-no">No</span></td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
 </div>
 
-<!-- ==================== SERVICES ==================== -->
 <div class="view" id="v-services" hidden>
 
   <section class="hero">
     <div class="wrap">
       <h1>Advice, or the <span class="grad">whole build.</span></h1>
       <p class="lede">Start with an hour and a problem. Grow into a website, a set of automations, a new logo and brand, or an application your team opens every day. Everything is quoted before it starts.</p>
-      <div class="acts"><a class="btn btn-fill" href="#/contact">Get a quote</a></div>
+      <div class="acts"><a class="btn btn-cream" href="#/contact">Get A Quote</a></div>
     </div>
   </section>
 
-  <div class="wrap">
-    <div class="marquee">
-      <div class="svcgrid">
-        <a class="bl" href="#/services" data-svc="svc-consulting">Consumer &amp; Business Consulting</a>
-        <a class="gr" href="#/services" data-svc="svc-education">Education for All Stages and Ages</a>
-        <a class="gr" href="#/services" data-svc="svc-websites">Comprehensive A&ndash;Z Website Management</a>
-        <a class="bl" href="#/services" data-svc="svc-automation">Process &amp; Task Automations</a>
-        <a class="bl" href="#/services" data-svc="svc-applications">Turnkey Application Development &amp; Sustainment</a>
-        <a class="gr" href="#/services" data-svc="svc-design">Graphic Design</a>
-        <a class="gr" href="#/services" data-svc="svc-bizdev">Business Development &amp; Advertising</a>
-        <a class="bl" href="#/services" data-svc="svc-bizdev">Social Media Management</a>
-      </div>
-    </div>
-  </div>
-
-  <section class="band sv-green" id="svc-consulting">
+  <section class="band p-green" id="svc-consulting">
     <div class="wrap">
-      <span class="kick">01 — Hourly</span>
-      <h2 style="margin-top:16px">Consumer &amp; business consulting</h2>
-      <p class="sub">Bring a problem, leave with a plan you could hand to anyone — including me. No minimum commitment and no requirement to buy anything afterwards. A single hour is a perfectly normal engagement, and every session ends with written notes you can act on or circulate.</p>
-      <div class="block">
-        <h3>What it covers</h3>
-        <ul>
-          <li>Tool selection and vendor sanity checks — what's worth paying for and what you already own</li>
-          <li>Workflow audits scoring your processes on volume, judgment and risk to find the real opportunities</li>
-          <li>Hands-on team training and working sessions with the people who'll actually use it</li>
-          <li>Second opinions on AI work already underway, or already quoted by someone else</li>
-          <li>Policy and review design — where a human has to stay in the loop and how to make that stick</li>
-        </ul>
-        <p class="price"><strong>Priced hourly.</strong> Rate quoted on the first call.</p>
-      </div>
+      <div class="p-split"><div>
+          <span class="kick">01 &mdash; Hourly</span>
+          <h2>Consumer &amp; business consulting</h2>
+          <p>Bring a problem, leave with a plan you could hand to anyone &mdash; including me. No minimum commitment and no requirement to buy anything afterwards. A single hour is a perfectly normal engagement, and every session ends with written notes you can act on or circulate.</p>
+          <p class="price"><strong>Priced hourly.</strong> Rate quoted on the first call.</p>
+        </div><div class="p-vis">
+          <p class="p-cap">What it covers</p>
+          <div class="p-panel"><ul class="p-list"><li><div>Tool selection and vendor sanity checks &mdash; what&rsquo;s worth paying for and what you already own</div></li><li><div>Workflow audits scoring your processes on volume, judgment and risk to find the real opportunities</div></li><li><div>Hands-on team training and working sessions with the people who&rsquo;ll actually use it</div></li><li><div>Second opinions on AI work already underway, or already quoted by someone else</div></li><li><div>Policy and review design &mdash; where a human has to stay in the loop and how to make that stick</div></li></ul></div>
+        </div></div>
     </div>
   </section>
 
-  <section class="band sv-blue" id="svc-education">
+  <section class="band p-blue" id="svc-education">
     <div class="wrap">
-      <span class="kick">02 — Per session or course</span>
-      <h2 style="margin-top:16px">Education for all stages and ages</h2>
-      <p class="sub">AI taught properly, for all ages and every level of complexity. That means a patient first lesson for someone who has never opened a chatbot, a practical course for a team that uses one badly, and a technical deep-dive for people who build. The material is built around who is actually in the room — never a generic slide deck rerun.</p>
-      <div class="block">
-        <h3>What it covers</h3>
-        <ul>
-          <li><strong>Beginners of any age.</strong> Kids, teens, adults and seniors — plain-language sessions with no assumed background and no jargon</li>
-          <li><strong>Staff and team training.</strong> Hands-on workshops using your own tools and your own work, so what's learned gets used on Monday</li>
-          <li><strong>Leadership briefings.</strong> What AI can and can't do, what it costs, where the risk sits, and what to ask a vendor</li>
-          <li><strong>Technical sessions.</strong> Prompting, retrieval, agents, evaluation and safe deployment for developers and analysts</li>
-          <li><strong>One-on-one tutoring.</strong> Private sessions at whatever pace suits, in person locally or over a call</li>
-          <li><strong>Safety and judgment throughout.</strong> How to spot a confident wrong answer, protect your data, and know when not to use it</li>
-        </ul>
-        <p class="price"><strong>Priced per session or per course.</strong> Group and family rates available.</p>
-      </div>
+      <div class="p-split flip"><div class="p-vis">
+          <p class="p-cap">What it covers</p>
+          <div class="p-panel"><ul class="p-list"><li><div><strong>Beginners of any age.</strong> Kids, teens, adults and seniors &mdash; plain-language sessions with no assumed background and no jargon</div></li><li><div><strong>Staff and team training.</strong> Hands-on workshops using your own tools and your own work, so what&rsquo;s learned gets used on Monday</div></li><li><div><strong>Leadership briefings.</strong> What AI can and can&rsquo;t do, what it costs, where the risk sits, and what to ask a vendor</div></li><li><div><strong>Technical sessions.</strong> Prompting, retrieval, agents, evaluation and safe deployment for developers and analysts</div></li><li><div><strong>One-on-one tutoring.</strong> Private sessions at whatever pace suits, in person locally or over a call</div></li><li><div><strong>Safety and judgment throughout.</strong> How to spot a confident wrong answer and know when not to use it</div></li></ul></div>
+        </div><div>
+          <span class="kick">02 &mdash; Per session or course</span>
+          <h2>Education for all stages and ages</h2>
+          <p>AI taught properly, for all ages and every level of complexity. A patient first lesson for someone who has never opened a chatbot, a practical course for a team that uses one badly, and a technical deep-dive for people who build. The material is built around who is actually in the room.</p>
+          <p class="price"><strong>Priced per session or per course.</strong> Group and family rates available.</p>
+        </div></div>
     </div>
   </section>
 
-  <section class="band sv-black" id="svc-websites">
+  <section class="band p-green" id="svc-websites">
     <div class="wrap">
-      <span class="kick">03 — Project + care plan</span>
-      <h2 style="margin-top:16px">Comprehensive A&ndash;Z website management</h2>
-      <p class="sub">Fast, modern sites that look like you meant it — designed, built, launched, and then actually kept running. The administration half is the part most shops quietly drop a week after launch. Built on your own domain and hosting, so if you ever want to move it, nothing stops you.</p>
-      <div class="block">
-        <h3>What it covers</h3>
-        <ul>
-          <li>Design and build from scratch, or a rebuild of a site that's aged badly</li>
-          <li>Copywriting, SEO fundamentals, analytics, and contact forms wired up properly</li>
-          <li>Hosting, domains, SSL certificates, and automated backups configured and monitored</li>
-          <li>Ongoing content changes, page additions, and software updates</li>
-          <li>Performance and mobile testing before launch — not after a customer complains</li>
-        </ul>
-        <p class="price"><strong>Fixed project fee,</strong> plus an optional monthly care plan.</p>
-      </div>
+      <div class="p-split"><div>
+          <span class="kick">03 &mdash; Project + care plan</span>
+          <h2>Comprehensive A&ndash;Z website management</h2>
+          <p>Fast, modern sites that look like you meant it &mdash; designed, built, launched, and then actually kept running. The administration half is the part most shops quietly drop a week after launch. Built on your own domain and hosting, so if you ever want to move it, nothing stops you.</p>
+          <p class="price"><strong>Fixed project fee,</strong> plus an optional monthly care plan.</p>
+        </div><div class="p-vis">
+          <p class="p-cap">What it covers</p>
+          <div class="p-panel"><ul class="p-list"><li><div>Design and build from scratch, or a rebuild of a site that&rsquo;s aged badly</div></li><li><div>Copywriting, SEO fundamentals, analytics, and contact forms wired up properly</div></li><li><div>Hosting, domains, SSL certificates, and automated backups configured and monitored</div></li><li><div>Ongoing content changes, page additions, and software updates</div></li><li><div>Performance and mobile testing before launch &mdash; not after a customer complains</div></li></ul></div>
+        </div></div>
     </div>
   </section>
 
-  <section class="band sv-grey" id="svc-automation">
+  <section class="band p-blue" id="svc-automation">
     <div class="wrap">
-      <span class="kick">04 — Fixed scope per workflow</span>
-      <h2 style="margin-top:16px">Process &amp; task automations</h2>
-      <p class="sub">The repetitive work your team does by hand every week, turned into something that runs on its own — and a written procedure for the times it doesn't. Nothing gets built before the process is mapped, and some of what you'd like automated shouldn't be. You'll hear that before you pay for it.</p>
-      <div class="block">
-        <h3>What it covers</h3>
-        <ul>
-          <li>Process mapping and opportunity scoring before a line of code exists</li>
-          <li>Intake and routing, data entry, reporting packs, and follow-up sequences</li>
-          <li>Integrations between the tools you already pay for, rather than new subscriptions</li>
-          <li>Document handling — invoices, contracts, forms — read and filed automatically</li>
-          <li>Written runbooks, a named internal owner, and a human review checkpoint where risk is real</li>
-        </ul>
-        <p class="price"><strong>Fixed scope and fee per workflow.</strong></p>
-      </div>
+      <div class="p-split flip"><div class="p-vis">
+          <p class="p-cap">What it covers</p>
+          <div class="p-panel"><ul class="p-list"><li><div>Process mapping and opportunity scoring before a line of code exists</div></li><li><div>Intake and routing, data entry, reporting packs, and follow-up sequences</div></li><li><div>Integrations between the tools you already pay for, rather than new subscriptions</div></li><li><div>Document handling &mdash; invoices, contracts, forms &mdash; read and filed automatically</div></li><li><div>Written runbooks, a named internal owner, and a human review checkpoint where risk is real</div></li></ul></div>
+        </div><div>
+          <span class="kick">04 &mdash; Fixed scope per workflow</span>
+          <h2>Process &amp; task automations</h2>
+          <p>The repetitive work your team does by hand every week, turned into something that runs on its own &mdash; and a written procedure for the times it doesn&rsquo;t. Nothing gets built before the process is mapped, and some of what you&rsquo;d like automated shouldn&rsquo;t be. You&rsquo;ll hear that before you pay for it.</p>
+          <p class="price"><strong>Fixed scope and fee per workflow.</strong></p>
+        </div></div>
     </div>
   </section>
 
-  <section class="band sv-pink" id="svc-applications">
+  <section class="band p-mesh" id="svc-applications">
     <div class="wrap">
-      <span class="kick">05 — Project + administration</span>
-      <h2 style="margin-top:16px">Turnkey application development &amp; sustainment</h2>
-      <p class="sub">Internal tools, client portals, dashboards, and AI-powered products — designed, built, deployed and maintained. Yours to keep, in your own accounts, with your own credentials. Scoping and interface design happen before development, so you can change the thing before it's expensive to change.</p>
-      <div class="block">
-        <h3>What it covers</h3>
-        <ul>
-          <li>Requirements, scoping, and interface design ahead of any build</li>
-          <li>Development, testing, and deployment to your own infrastructure</li>
-          <li>User accounts, permissions, and data handling done properly from day one</li>
-          <li>Ongoing administration, monitoring, backups, and feature work</li>
-          <li>Documentation and handover so another developer could pick it up tomorrow</li>
-        </ul>
-        <p class="price"><strong>Fixed scope fee,</strong> plus monthly administration if you want it.</p>
+      <div class="p-glass">
+        <span class="kick">05 &mdash; Project + administration</span>
+        <h2>Turnkey application development &amp; sustainment.</h2>
+        <p class="sub">Internal tools, client portals, dashboards, and AI-powered products &mdash; designed, built, deployed and maintained. Yours to keep, in your own accounts, with your own credentials.</p>
+        <div class="p-gitems three">
+          <div class="gi"><span class="n">01</span><h3>Scoped before built</h3><p>Requirements and interface design happen ahead of development, so you can change the thing before it&rsquo;s expensive to change.</p></div>
+          <div class="gi"><span class="n">02</span><h3>Built on your infrastructure</h3><p>Development, testing and deployment into your own accounts. User accounts, permissions and data handling done properly from day one.</p></div>
+          <div class="gi"><span class="n">03</span><h3>Kept running</h3><p>Ongoing administration, monitoring, backups and feature work &mdash; plus documentation another developer could pick up tomorrow.</p></div>
+        </div>
+        <div class="p-grow"><span>Fixed scope fee</span><span>Monthly administration optional</span><span>You own the code</span></div>
       </div>
     </div>
   </section>
 
-  <section class="band sv-aqua" id="svc-design">
+  <section class="band p-green" id="svc-design">
     <div class="wrap">
-      <span class="kick">06 — Per asset or full identity</span>
-      <h2 style="margin-top:16px">Graphic design</h2>
-      <p class="sub">A logo, a full brand identity, or the everyday graphics a business actually runs on. Drawn properly, built in real vector files, and handed over in every format you will ever be asked for — so you are never stuck emailing a screenshot of your own logo to a printer.</p>
-      <div class="block">
-        <h3>What it covers</h3>
-        <ul>
-          <li>Logo design — original marks drawn from scratch, with revision rounds built in</li>
-          <li>Full brand identity — colors, typefaces, and rules for how the mark is used</li>
-          <li>Business cards, letterhead, signage, flyers, and print-ready artwork</li>
-          <li>Social media graphics, profile art, and templates you can reuse yourself</li>
-          <li>Website and application graphics — icons, illustrations, and page imagery</li>
-          <li>Every file format you need: vector source, print, web, light and dark versions</li>
-          <li>Full ownership of the finished artwork, with the source files in your hands</li>
-        </ul>
-        <p class="price"><strong>Priced per asset or as a full identity package.</strong> Quoted before any work starts.</p>
-      </div>
+      <div class="p-split"><div>
+          <span class="kick">06 &mdash; Per asset or full identity</span>
+          <h2>Graphic design</h2>
+          <p>A logo, a full brand identity, or the everyday graphics a business actually runs on. Drawn properly, built in real vector files, and handed over in every format you will ever be asked for &mdash; so you are never stuck emailing a screenshot of your own logo to a printer.</p>
+          <p class="price"><strong>Priced per asset or as a full identity package.</strong> Quoted before any work starts.</p>
+        </div><div class="p-vis">
+          <p class="p-cap">What it covers</p>
+          <div class="p-panel"><ul class="p-list"><li><div>Logo design &mdash; original marks drawn from scratch, with revision rounds built in</div></li><li><div>Full brand identity &mdash; colors, typefaces, and rules for how the mark is used</div></li><li><div>Business cards, letterhead, signage, flyers, and print-ready artwork</div></li><li><div>Social media graphics, profile art, and templates you can reuse yourself</div></li><li><div>Website and application graphics &mdash; icons, illustrations, and page imagery</div></li><li><div>Every file format you need, and full ownership of the finished artwork</div></li></ul></div>
+        </div></div>
     </div>
   </section>
 
-  <section class="band sv-sand" id="svc-bizdev">
+  <section class="band p-blue" id="svc-bizdev">
     <div class="wrap">
-      <span class="kick">07 — Retainer or per campaign</span>
-      <h2 style="margin-top:16px">Business development &amp; advertising</h2>
-      <p class="sub">Getting the phone to ring, and making sure what people find when they look you up is worth finding. Strategy, the materials, the ad spend and the reporting &mdash; run as one thing rather than five vendors who never speak to each other. You keep every account in your own name.</p>
-      <div class="block">
-        <h3>What it covers</h3>
-        <ul>
-          <li>Positioning and messaging &mdash; what you sell, who it is for, and why they should pick you</li>
-          <li>Paid advertising on search and social, set up, monitored and adjusted against real numbers</li>
-          <li>Local search and Google Business Profile, so you turn up when someone nearby looks</li>
-          <li>Email campaigns, newsletters and follow-up sequences that run without being babysat</li>
-          <li>Social media content, scheduling and the graphics to go with it</li>
-          <li>Sales collateral &mdash; one-pagers, proposals, decks and pricing sheets</li>
-          <li>Lead capture and follow-up wired into whatever you already use to track customers</li>
-          <li>Plain-language reporting on what each dollar actually brought back</li>
-        </ul>
-        <p class="price"><strong>Monthly retainer or priced per campaign.</strong> Ad spend is yours, paid directly, never marked up.</p>
-      </div>
+      <div class="p-split flip"><div class="p-vis">
+          <p class="p-cap">What it covers</p>
+          <div class="p-panel"><ul class="p-list"><li><div>Positioning and messaging &mdash; what you sell, who it is for, and why they should pick you</div></li><li><div>Paid advertising on search and social, set up, monitored and adjusted against real numbers</div></li><li><div>Local search and Google Business Profile, so you turn up when someone nearby looks</div></li><li><div>Email campaigns, newsletters and follow-up sequences that run without being babysat</div></li><li><div>Social media content, scheduling and the graphics to go with it</div></li><li><div>Sales collateral &mdash; one-pagers, proposals, decks and pricing sheets</div></li><li><div>Plain-language reporting on what each dollar actually brought back</div></li></ul></div>
+        </div><div>
+          <span class="kick">07 &mdash; Retainer or per campaign</span>
+          <h2>Business development &amp; advertising</h2>
+          <p>Getting the phone to ring, and making sure what people find when they look you up is worth finding. Strategy, the materials, the ad spend and the reporting &mdash; run as one thing rather than five vendors who never speak to each other. You keep every account in your own name.</p>
+          <p class="price"><strong>Monthly retainer or priced per campaign.</strong> Ad spend is yours, paid directly, never marked up.</p>
+        </div></div>
     </div>
   </section>
 
-  <section class="band" id="svc-administration">
+  <section class="band p-green" id="svc-administration">
     <div class="wrap">
       <div class="sec-kick"><span class="bar"></span><span class="kick">Engagement shapes</span><span class="bar"></span></div>
       <h2>Pick the shape that fits.</h2>
-      <div class="cols">
-        <div class="c">
-          <span class="n">HOURLY</span><h3>Advisory</h3>
-          <p>Ad-hoc consulting, audits, training, and second opinions. Billed by the hour, no minimum commitment.</p>
-        </div>
-        <div class="c">
-          <span class="n">PROJECT</span><h3>Fixed scope</h3>
-          <p>A website, a set of automations, or an application. Written scope, fixed price, agreed timeline. Changes quoted separately.</p>
-        </div>
-        <div class="c">
-          <span class="n">MONTHLY</span><h3>Administration</h3>
-          <p>Hosting, updates, monitoring and small changes for anything already built. Cancel any time.</p>
-        </div>
-      </div>
+      <p class="sub">Three ways to work together. Most people start at the top and move down only if it earns the move.</p>
+      <table class="p-table">
+        <thead><tr><th>Shape</th><th>Commitment</th></tr></thead>
+        <tbody>
+          <tr><td>Advisory &mdash; hourly<span class="sm">Ad-hoc consulting, audits, training, and second opinions.</span></td><td><span class="p-yes">No minimum</span></td></tr>
+          <tr><td>Fixed scope &mdash; project<span class="sm">A website, a set of automations, or an application. Written scope, fixed price, agreed timeline. Changes quoted separately.</span></td><td><span class="p-yes">Quoted up front</span></td></tr>
+          <tr><td>Administration &mdash; monthly<span class="sm">Hosting, updates, monitoring and small changes for anything already built.</span></td><td><span class="p-yes">Cancel any time</span></td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
 </div>
 
-<!-- ==================== CONTACT ==================== -->
 <div class="view" id="v-contact" hidden>
 
   <section class="hero">
@@ -1492,10 +1336,24 @@ a.val:hover{color:var(--blue-tx)}
     </div>
   </section>
 
-  <section class="band" id="inq-form">
+  <section class="band p-mesh" id="inq-intro">
     <div class="wrap">
-      <form id="inqForm" novalidate>
-        <div class="sec-kick"><span class="bar"></span><span class="kick sm">Send an inquiry</span><span class="bar"></span></div>
+      <div class="p-glass">
+        <span class="kick">Direct</span>
+        <h2>Fifteen minutes, no pitch deck, no obligation.</h2>
+        <p class="sub">You&rsquo;ll leave the call with a clear first move, whether or not you ever hire anyone. Call, email, or send the form below &mdash; all three reach the same person.</p>
+        <div class="p-grow"><span>502-755-0254</span><span>aiconsumerprotection@proton.me</span><span>You get Michael, not a queue</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band p-green" id="inq-form">
+    <div class="wrap">
+      <div class="p-split">
+        <div class="p-formcol">
+          <span class="kick">Send an inquiry</span>
+          <h2>Tell me what you&rsquo;re trying to solve.</h2>
+<form id="inqForm" novalidate>
         <div class="field">
           <label for="f-name">Your name</label>
           <input id="f-name" name="name" type="text" autocomplete="name" required>
@@ -1533,6 +1391,19 @@ a.val:hover{color:var(--blue-tx)}
         <button class="btn btn-fill" type="submit">Send inquiry</button>
         <p class="form-msg" id="inqMsg" hidden></p>
       </form>
+        </div>
+        <div class="p-vis">
+          <p class="p-cap">What happens next</p>
+          <div class="p-panel">
+            <ul class="p-list">
+              <li><div><strong>Same day, usually.</strong> It comes straight to me &mdash; there is no inbox it sits in and no assistant triaging it.</div></li>
+              <li><div><strong>A real answer first.</strong> If the honest reply is &ldquo;this isn&rsquo;t worth automating,&rdquo; you get that for free before anyone talks about money.</div></li>
+              <li><div><strong>Nothing is quoted blind.</strong> Scope and a fixed number come before any work starts, in writing.</div></li>
+              <li><div><strong>Not ready to talk yet?</strong> Try the <a href="#/">assistant on the homepage</a> &mdash; it answers most first questions.</div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1583,7 +1454,7 @@ a.val:hover{color:var(--blue-tx)}
     <h2>Let's find out where you'd actually start.</h2>
     <p>Bring your most frustrating business bottlenecks and/or the biggest dreams of your life.</p>
     <div class="acts">
-      <a class="btn btn-cream" href="#/contact">Send an inquiry</a>
+      <a class="btn btn-cream" href="#/contact">Send An Inquiry</a>
     </div>
   </div>
 </section>

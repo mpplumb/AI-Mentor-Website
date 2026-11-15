@@ -1,0 +1,32 @@
+Inner pages: section patterns, cream CTAs, lit colour bands
+
+All four inner pages (AI Overview, Strategy, Services, Contact)
+rebuilt on a shared set of section patterns. Homepage untouched.
+
+Section patterns
+- Four reusable layouts introduced: editorial split with a figure
+  panel, multi-column card rows, a yes/no comparison table, and a
+  glass panel over an animated mesh
+- Each page uses the glass panel exactly once as its feature moment
+- Seven legacy per-section CSS blocks removed; they were beating the
+  new patterns on ID specificity and forcing flat black grounds
+
+Calls to action
+- Cream button with a warm glow now carries every inner-page CTA
+- AI Overview gained a CTA it did not have
+- Button wording set in title case: Learn More, Start With A Call,
+  Get A Quote, Send An Inquiry
+
+Section grounds
+- Sections alternate tinted green and blue bands, drawn from the
+  logo hues (#E3FAEE and #D2ECFE) rather than neutral greys
+- Each band is lit rather than flat: a radial bloom in the logo
+  colour from one top corner, a quieter counter-bloom in the other
+  hue from the opposite bottom corner, and a feathered white sheen
+  along the top edge
+- The lit corner alternates between green and blue bands, so light
+  appears to travel down the page
+- Blue bands run brighter than green by design; body text clears
+  WCAG AA on both (5.17:1 on the blue)
+
+Verified at 430-1920px: no horizontal overflow, no console errors.
