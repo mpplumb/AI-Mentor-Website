@@ -656,6 +656,19 @@ a.row:hover h3{color:var(--blue-tx)}
 .ask-note{font-size:14px;margin:56px auto 0;color:var(--body);max-width:88ch}
 .ask-note a{color:var(--blue-tx);font-weight:600}
 .ask-err{font-size:15.5px;color:var(--ink);padding:22px;border-top:1px solid var(--hair);max-width:76ch;margin:0 auto}
+.ask-soon{
+  display:inline-flex;align-items:center;gap:9px;margin:0 auto 4px;
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-tx);
+  background:#E6F2FD;border:1px solid #BFDFF7;border-radius:999px;padding:7px 16px;
+}
+.ask-soon::before{
+  content:"";width:7px;height:7px;border-radius:50%;
+  background:linear-gradient(135deg,var(--logo-blue),var(--logo-green));
+  animation:soonpulse 2.4s ease-in-out infinite;
+}
+@keyframes soonpulse{0%,100%{opacity:.35}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ask-soon::before{animation:none}}
 
 /* ================= CONTACT ================= */
 .contact-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(38px,5vw,90px);margin-top:0;text-align:center}
@@ -970,7 +983,7 @@ a.val:hover{color:var(--blue-tx)}
     <div class="wrap">
       <img class="mark" src="assets/mark.png" alt="">
       <h2>Don't wait, the world and your competitors aren't — start your journey right here, right now.</h2>
-      <p class="intro">A real AI assistant, right here on the page. Ask it about your business — or about dinner, your calendar, your training plan, the hobby you keep meaning to start. No form, no email, no sales call first.</p>
+      <p class="intro" id="askIntro">A real AI assistant, right here on the page — launching shortly. Ask it about your business, or about dinner, your calendar, your training plan, the hobby you keep meaning to start. No form, no email, no sales call first.</p>
 
       <div class="ask-box">
         <div class="chips" id="chips">
@@ -985,7 +998,7 @@ a.val:hover{color:var(--blue-tx)}
           <button class="chip" type="button">Suggest a hobby I could start this weekend</button>
         </div>
         <div class="transcript" id="transcript">
-          <div class="turn bot">
+          <div class="turn bot" id="askGreet">
             <p class="who">AI Mentor</p>
             <p class="msg">Ask me anything — your business, your schedule, what to cook tonight, where to start with a new hobby. I'll give you a straight answer, including when the honest answer is "this isn't worth automating."</p>
           </div>
@@ -997,7 +1010,7 @@ a.val:hover{color:var(--blue-tx)}
         </form>
         <div class="ask-err" id="askErr" hidden></div>
       </div>
-      <p class="ask-note">Answers above are AI generated and have potential to make mistakes. For serious inquiries <a href="#/contact">talk to your AI Consultant directly</a>.</p>
+      <p class="ask-note" id="askNote">Answers above are AI generated and have potential to make mistakes. For serious inquiries <a href="#/contact">talk to your AI Consultant directly</a>.</p>
     </div>
   </section>
 
@@ -1634,6 +1647,28 @@ a.val:hover{color:var(--blue-tx)}
     errEl.textContent = message;
   }
 
+  function comingSoon(){
+    disableAsk("");
+    var greet = document.getElementById("askGreet");
+    if (greet) greet.hidden = true;
+    var note = document.getElementById("askNote");
+    if (note) note.hidden = true;
+    errEl.innerHTML =
+      '<p class="ask-soon">Coming soon</p>' +
+      '<p>The assistant is being connected and will be live on this page shortly. ' +
+      'In the meantime you can reach Michael directly \u2014 ' +
+      '<a href="tel:+15027550254">502-755-0254</a> or ' +
+      '<a href="mailto:aiconsumerprotection@proton.me">aiconsumerprotection@proton.me</a> ' +
+      '\u2014 and you will get a real answer, not a bot.</p>';
+  }
+
+  function goLive(){
+    var intro = document.getElementById("askIntro");
+    if (intro) intro.textContent = "A real AI assistant, right here on the page. Ask it about your "
+      + "business \u2014 or about dinner, your calendar, your training plan, the hobby you keep "
+      + "meaning to start. No form, no email, no sales call first.";
+  }
+
   function ask(question){
     if (!ready || !sampleFn) return;
     errEl.hidden = true;
@@ -1697,13 +1732,11 @@ a.val:hover{color:var(--blue-tx)}
 
   if (window.claude && typeof window.claude.use === "function"){
     window.claude.use("sample").then(function(s){
-      if (!s){ disableAsk("The live assistant only runs inside Claude. Call 502-755-0254 or email aiconsumerprotection@proton.me and you'll get a real answer from Michael."); return; }
-      sampleFn = s; ready = true;
-    }).catch(function(){
-      disableAsk("The live assistant couldn't start. Call 502-755-0254 or email aiconsumerprotection@proton.me instead.");
-    });
+      if (!s){ comingSoon(); return; }
+      sampleFn = s; ready = true; goLive();
+    }).catch(comingSoon);
   } else {
-    disableAsk("The live assistant only runs inside Claude. Call 502-755-0254 or email aiconsumerprotection@proton.me and you'll get a real answer from Michael.");
+    comingSoon();
   }
 
 })();
