@@ -1677,6 +1677,10 @@ a.val:hover{color:var(--blue-tx)}
   });
 
   /* ---------------- ASK AI MENTOR ---------------- */
+  /* Paste the Cloudflare Worker address between the quotes to switch the
+     assistant on. Leave it empty and the page shows the Coming soon panel. */
+  var WORKER_URL = "";
+
   var RULES = [
     "You are the assistant on the website of AI Mentor, a small AI consulting practice owned by Michael Plumb.",
     "AI Mentor's slogan is \"Assured & Affordable AI Guidance\". Its mission, and its number one priority, is to protect and guide consumers throughout the AI revolution and realm \u2014 helping them identify risks, understand information, protect their interests, and counsel their decisions. In practice that means: honest advice including turning work down, no vendor lock-in (everything built in the client's own accounts), a written scope and fixed price before work starts, and clear agreements about data handling with a human review step wherever the risk is real.",
@@ -1689,7 +1693,33 @@ a.val:hover{color:var(--blue-tx)}
     "Do not claim to be Michael. You are an assistant on his site."
   ].join("\n");
 
-  var sampleFn = null, ready = false;
+  function workerAsk(messages, opts){
+    return fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: messages }),
+      signal: opts && opts.signal
+    }).then(function(r){
+      if (!r.ok || !r.body){
+        var e = new Error("worker");
+        e.code = (r.status === 429) ? "rate_limited"
+               : (r.status === 413) ? "prompt_too_large"
+               : "upstream_error";
+        throw e;
+      }
+      var reader = r.body.getReader(), dec = new TextDecoder(), acc = "";
+      return (function pump(){
+        return reader.read().then(function(res){
+          if (res.done) return { text: acc };
+          acc += dec.decode(res.value, { stream: true });
+          if (opts && opts.onText) opts.onText({ text: acc });
+          return pump();
+        });
+      })();
+    });
+  }
+
+  var sampleFn = null, ready = false, useWorker = false;
   var tEl   = document.getElementById("transcript");
   var form  = document.getElementById("askForm");
   var input = document.getElementById("askInput");
@@ -1766,7 +1796,7 @@ a.val:hover{color:var(--blue-tx)}
   }
 
   function ask(question){
-    if (!ready || !sampleFn) return;
+    if (!ready || (!sampleFn && !useWorker)) return;
     errEl.hidden = true;
     addTurn("You", "you", question, false);
     turns.push({ role: "user", content: question });
@@ -1774,7 +1804,10 @@ a.val:hover{color:var(--blue-tx)}
     setBusy(true);
     ctl = new AbortController();
 
-    sampleFn([{ role: "user", content: RULES }].concat(turns), {
+    var send_ = useWorker ? workerAsk : sampleFn;
+    var payload = useWorker ? turns : [{ role: "user", content: RULES }].concat(turns);
+
+    send_(payload, {
       cache: false,
       modelTier: "quick",
       signal: ctl.signal,
@@ -1826,7 +1859,9 @@ a.val:hover{color:var(--blue-tx)}
     ask(b.textContent.trim());
   });
 
-  if (window.claude && typeof window.claude.use === "function"){
+  if (WORKER_URL){
+    useWorker = true; ready = true; goLive();
+  } else if (window.claude && typeof window.claude.use === "function"){
     window.claude.use("sample").then(function(s){
       if (!s){ comingSoon(); return; }
       sampleFn = s; ready = true; goLive();
