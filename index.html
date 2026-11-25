@@ -785,15 +785,16 @@ a.val:hover{color:var(--blue-tx)}
   font-family:"IBM Plex Mono",monospace;font-size:min(3.55vw,50px);letter-spacing:.04em;
   text-transform:uppercase;color:var(--body);line-height:1.15;white-space:nowrap;
 }
-.f-social{display:flex;justify-content:center;align-items:center;gap:clamp(22px,2.6vw,40px);
-  padding:26px 0 4px}
+.f-social{display:flex;justify-content:center;align-items:center;gap:clamp(12px,2.4vw,40px);
+  padding:30px 0 6px;flex-wrap:nowrap}
 .f-social a{display:inline-flex;align-items:center;justify-content:center;
-  width:54px;height:54px;border-radius:50%;color:var(--body);
+  width:92px;height:92px;border-radius:50%;color:var(--body);
   transition:color .16s ease,transform .18s ease,background .16s ease}
 .f-social a:hover{color:var(--blue-tx);transform:translateY(-3px);background:rgba(10,108,180,.08)}
-.f-social svg{width:32px;height:32px;fill:currentColor;display:block}
-@media(max-width:560px){.f-social{gap:14px}.f-social a{width:46px;height:46px}
-  .f-social svg{width:27px;height:27px}}
+.f-social svg{width:64px;height:64px;fill:currentColor;display:block}
+@media(max-width:880px){.f-social svg{width:46px;height:46px}.f-social a{width:66px;height:66px}}
+@media(max-width:560px){.f-social{gap:8px}.f-social a{width:52px;height:52px}
+  .f-social svg{width:36px;height:36px}}
 .f-botband{background:#0B0D10;width:100%}
 .f-bot{padding:26px 0 30px;color:#9AA6B1;display:flex;justify-content:center;gap:10px 30px;flex-wrap:wrap;font-size:15.5px}
 @media(max-width:560px){.f-contact{flex-direction:column;align-items:center;gap:16px}
